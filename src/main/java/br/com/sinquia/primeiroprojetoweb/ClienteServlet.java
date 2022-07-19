@@ -17,12 +17,31 @@ public class ClienteServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         System.out.println("Chamando Metodo");
-        PrintWriter writer = resp.getWriter();
+        response.setContentType("text/html");
+
+        String nome = request.getParameter("nome");
+        String cpf = request.getParameter("cpf");
+
+        PrintWriter writer = response.getWriter();
         writer.println("<html>");
         writer.println("<body>");
-        writer.println("<p>Teste GET Servlet Cliente</p>");
+        writer.println("<p>Nome Cliente: "+nome+"</p>");
+        writer.println("<p>CPF Cliente: "+cpf+"</p>");
+        writer.println("</body>");
+        writer.println("</html>");
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        System.out.println("Chamando Metodo");
+        response.setContentType("text/html");
+
+        PrintWriter writer = response.getWriter();
+        writer.println("<html>");
+        writer.println("<body>");
+        writer.println("<p>POST</p>");
         writer.println("</body>");
         writer.println("</html>");
     }
