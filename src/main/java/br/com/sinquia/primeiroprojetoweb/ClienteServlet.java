@@ -31,6 +31,8 @@ public class ClienteServlet extends HttpServlet {
         writer.println("<p>CPF Cliente: "+cpf+"</p>");
         writer.println("</body>");
         writer.println("</html>");
+
+        super.destroy();
     }
 
     @Override
