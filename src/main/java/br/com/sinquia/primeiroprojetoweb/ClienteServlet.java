@@ -1,5 +1,6 @@
 package br.com.sinquia.primeiroprojetoweb;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,33 +20,22 @@ public class ClienteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         System.out.println("Chamando Metodo");
-        response.setContentType("text/html");
-
-        String nome = request.getParameter("nome");
-        String cpf = request.getParameter("cpf");
-
-        PrintWriter writer = response.getWriter();
-        writer.println("<html>");
-        writer.println("<body>");
-        writer.println("<p>Nome Cliente: "+nome+"</p>");
-        writer.println("<p>CPF Cliente: "+cpf+"</p>");
-        writer.println("</body>");
-        writer.println("</html>");
-
-        super.destroy();
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         System.out.println("Chamando Metodo");
-        response.setContentType("text/html");
+        String nome = request.getParameter("nome");
+        String cpf = request.getParameter("cpf");
+        String email = request.getParameter("email");
+        String idade = request.getParameter("idade");
 
-        PrintWriter writer = response.getWriter();
-        writer.println("<html>");
-        writer.println("<body>");
-        writer.println("<p>POST</p>");
-        writer.println("</body>");
-        writer.println("</html>");
+        System.out.println("cadastro cliente...");
+
+        request.setAttribute("meuNome",nome);
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("sucesso-cadastro-cliente.jsp");
+        dispatcher.forward(request,response);
     }
 
     @Override
