@@ -8,5 +8,6 @@
 <h1><%= "Pagina Inicial!" %></h1>
 <br/>
 <a href="minha-servlet">Chamar a Servlet</a>
+<a href="cadastro-cliente.jsp">Cadastro de Cliente</a>
 </body>
 </html>

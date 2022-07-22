@@ -11,6 +11,6 @@
     <title>Sucesso cadastro Cliente</title>
 </head>
 <body>
-    <h1>Cliente ${meuNome} cadastrado com sucesso!</h1>
+    <h1>Cliente  de id: ${idClienteSalvo} , cadastrado com sucesso!</h1>
 </body>
 </html>

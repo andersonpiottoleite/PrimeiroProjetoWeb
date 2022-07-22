@@ -11,25 +11,29 @@
     <title>Cadastro de Cliente</title>
 </head>
 <body>
-    <form action="cliente-servlet" method="post">
-        <div>
-            <label for="idNome">Nome:</label>
-            <input type="text" id="idNome" name="nome">
-        </div>
-        <div>
-            <label for="idCpf">CPF:</label>
-            <input type="text" id="idCpf" name="cpf">
-        </div>
-        <div>
-            <label for="idEmail">Email:</label>
-            <input type="text" id="idEmail" name="email">
-        </div>
-        <div>
-            <label for="idIdade">Idade:</label>
-            <input type="text" id="idIdade" name="idade">
-        </div>
-        <input type="submit" value="Enviar">
-    </form>
+    <h1>Cadastro de Cliente</h1>
+    <fieldset>
+        <legend>Dados basicos</legend>
+        <form action="cliente-servlet" method="post">
+            <div>
+                <label for="idNome">Nome:</label>
+                <input type="text" id="idNome" name="nome">
+            </div>
+            <div>
+                <label for="idCpf">CPF:</label>
+                <input type="text" id="idCpf" name="cpf">
+            </div>
+            <div>
+                <label for="idEmail">Email:</label>
+                <input type="text" id="idEmail" name="email">
+            </div>
+            <div>
+                <label for="idIdade">Idade:</label>
+                <input type="text" id="idIdade" name="idade">
+            </div>
+            <input type="submit" value="Enviar">
+        </form>
+    </fieldset>
 
 </body>
 </html>

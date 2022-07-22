@@ -1,5 +1,8 @@
 package br.com.sinquia.primeiroprojetoweb;
 
+import br.com.sinquia.primeiroprojetoweb.bo.ClienteBusinessObject;
+import br.com.sinquia.primeiroprojetoweb.model.Cliente;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 @WebServlet(value = "/cliente-servlet")
 public class ClienteServlet extends HttpServlet {
@@ -25,16 +29,28 @@ public class ClienteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         System.out.println("Chamando Metodo");
+
         String nome = request.getParameter("nome");
         String cpf = request.getParameter("cpf");
         String email = request.getParameter("email");
         String idade = request.getParameter("idade");
 
-        System.out.println("cadastro cliente...");
+        ClienteBusinessObject businessObject = new ClienteBusinessObject();
 
-        request.setAttribute("meuNome",nome);
+        Integer idadeCliente = null;
+        if(!idade.isEmpty()){
+            idadeCliente = Integer.parseInt(idade);
+        }
+        Cliente cliente = new Cliente(nome, cpf, email, idadeCliente);
+        Cliente clienteSalvo = businessObject.save(cliente);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("sucesso-cadastro-cliente.jsp");
+        request.setAttribute("idClienteSalvo", clienteSalvo.getId());
+
+        List<Cliente> clientes = businessObject.findAll();
+
+        request.setAttribute("clientes", clientes);
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("lista-clientes.jsp");
         dispatcher.forward(request,response);
     }
 
