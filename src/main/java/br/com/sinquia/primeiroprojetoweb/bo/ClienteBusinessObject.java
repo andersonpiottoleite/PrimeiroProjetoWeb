@@ -3,6 +3,7 @@ package br.com.sinquia.primeiroprojetoweb.bo;
 import br.com.sinquia.primeiroprojetoweb.dao.ClienteDAO;
 import br.com.sinquia.primeiroprojetoweb.model.Cliente;
 
+import java.io.DataInput;
 import java.util.List;
 import java.util.Objects;
 
