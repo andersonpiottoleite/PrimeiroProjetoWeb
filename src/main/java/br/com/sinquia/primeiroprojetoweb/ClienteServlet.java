@@ -2,8 +2,13 @@ package br.com.sinquia.primeiroprojetoweb;
 
 import br.com.sinquia.primeiroprojetoweb.bo.ClienteBusinessObject;
 import br.com.sinquia.primeiroprojetoweb.dao.ClienteDAO;
+import br.com.sinquia.primeiroprojetoweb.injecao.email.EmailService;
+import br.com.sinquia.primeiroprojetoweb.injecao.email.GmailService;
+import br.com.sinquia.primeiroprojetoweb.injecao.email.ServicoGmailQualifier;
 import br.com.sinquia.primeiroprojetoweb.model.Cliente;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +21,11 @@ import java.util.List;
 
 @WebServlet(value = "/cliente-servlet")
 public class ClienteServlet extends HttpServlet {
+
+    @Inject
+    @Named("servicoGmail")
+    //@ServicoGmailQualifier
+    private EmailService emailService;
 
     @Override
     public void init() {
@@ -44,6 +54,8 @@ public class ClienteServlet extends HttpServlet {
         }
         Cliente cliente = new Cliente(nome, cpf, email, idadeCliente);
         Cliente clienteSalvo = businessObject.save(cliente);
+
+        emailService.enviaEmailBoasVindas(cliente);
 
         request.setAttribute("idClienteSalvo", clienteSalvo.getId());
 

@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.ToString;
 
 @Data
+@ToString(of={"nome", "cpf"})
 public class Cliente {
 
     private Long id;
@@ -18,5 +19,13 @@ public class Cliente {
         this.cpf = cpf;
         this.email = email;
         this.idade = idade;
+    }
+
+    public Cliente(){
+
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new Cliente("Anderson", "35461848826", "piottok10@gmail.com", 37));
     }
 }
