@@ -12,11 +12,13 @@ import java.util.List;
  * isso deve ser subsitituido pela nomenclatura repository
  */
 
-public class ClienteDAO {
+public class ClienteDAOImpl implements ClienteDAOI{
 
     private static List<Cliente> bancoClientes = new ArrayList<>();
     private static long countCliente;
 
+
+    @Override
     public Cliente save(Cliente cliente){
         countCliente++;
         cliente.setId(countCliente);
@@ -24,6 +26,7 @@ public class ClienteDAO {
         return cliente;
     }
 
+    @Override
     public List<Cliente> findAll(){
         return bancoClientes;
     }

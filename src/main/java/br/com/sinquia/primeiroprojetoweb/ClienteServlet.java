@@ -1,10 +1,8 @@
 package br.com.sinquia.primeiroprojetoweb;
 
-import br.com.sinquia.primeiroprojetoweb.bo.ClienteBusinessObject;
-import br.com.sinquia.primeiroprojetoweb.dao.ClienteDAO;
+import br.com.sinquia.primeiroprojetoweb.bo.ClienteBusinessObjectI;
+import br.com.sinquia.primeiroprojetoweb.bo.ClienteBusinessObjectImpl;
 import br.com.sinquia.primeiroprojetoweb.injecao.email.EmailService;
-import br.com.sinquia.primeiroprojetoweb.injecao.email.GmailService;
-import br.com.sinquia.primeiroprojetoweb.injecao.email.ServicoGmailQualifier;
 import br.com.sinquia.primeiroprojetoweb.model.Cliente;
 
 import javax.inject.Inject;
@@ -16,7 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 @WebServlet(value = "/cliente-servlet")
@@ -26,6 +23,13 @@ public class ClienteServlet extends HttpServlet {
     @Named("servicoGmail")
     //@ServicoGmailQualifier
     private EmailService emailService;
+
+    private ClienteBusinessObjectI clienteBusinessObjectI;
+
+    @Inject
+    public ClienteServlet(ClienteBusinessObjectI clienteBusinessObjectI){
+        this.clienteBusinessObjectI = clienteBusinessObjectI;
+    }
 
     @Override
     public void init() {
@@ -46,20 +50,18 @@ public class ClienteServlet extends HttpServlet {
         String email = request.getParameter("email");
         String idade = request.getParameter("idade");
 
-        ClienteBusinessObject businessObject = new ClienteBusinessObject();
-
         Integer idadeCliente = null;
         if(!idade.isEmpty()){
             idadeCliente = Integer.parseInt(idade);
         }
         Cliente cliente = new Cliente(nome, cpf, email, idadeCliente);
-        Cliente clienteSalvo = businessObject.save(cliente);
+        Cliente clienteSalvo = clienteBusinessObjectI.save(cliente);
 
         emailService.enviaEmailBoasVindas(cliente);
 
         request.setAttribute("idClienteSalvo", clienteSalvo.getId());
 
-        List<Cliente> clientes = businessObject.findAll();
+        List<Cliente> clientes = clienteBusinessObjectI.findAll();
 
         request.setAttribute("clientes", clientes);
 

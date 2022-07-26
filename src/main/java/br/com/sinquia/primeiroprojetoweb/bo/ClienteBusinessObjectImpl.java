@@ -1,20 +1,23 @@
 package br.com.sinquia.primeiroprojetoweb.bo;
 
-import br.com.sinquia.primeiroprojetoweb.dao.ClienteDAO;
+import br.com.sinquia.primeiroprojetoweb.dao.ClienteDAOI;
+import br.com.sinquia.primeiroprojetoweb.dao.ClienteDAOImpl;
 import br.com.sinquia.primeiroprojetoweb.model.Cliente;
 
-import java.io.DataInput;
+import javax.inject.Inject;
 import java.util.List;
 import java.util.Objects;
 
-public class ClienteBusinessObject {
+public class ClienteBusinessObjectImpl implements ClienteBusinessObjectI{
 
-    private ClienteDAO clienteDAO;
+    private ClienteDAOI clienteDAO;
 
-    public ClienteBusinessObject(){
-        clienteDAO = new ClienteDAO(); // TODO rever isso, não é bacana
+    @Inject
+    public ClienteBusinessObjectImpl(ClienteDAOI clienteDAOI){
+        this.clienteDAO = clienteDAOI;
     }
 
+    @Override
     public Cliente save(Cliente cliente){
         valida(cliente);
         return clienteDAO.save(cliente);
@@ -26,6 +29,7 @@ public class ClienteBusinessObject {
         }
     }
 
+    @Override
     public List<Cliente> findAll(){
         return clienteDAO.findAll();
     }
