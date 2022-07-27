@@ -20,7 +20,7 @@ import java.util.Objects;
 
 @WebServlet(value = "/cliente-servlet/*") /*    esse    /*   diz que qualquer requisição que venha com
                                                 cliente-servlet/qualquer-coisa vai cair ai nessa servlet.
-                                                exemplo
+                                                exemplo "cliente-servlet/cadastrar-cliente"
                                            */
 public class ClienteServlet extends HttpServlet {
 
