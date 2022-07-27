@@ -84,8 +84,6 @@ public class ClienteServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        System.out.println("Chamando Metodo GET");
-
         Cliente cliente = criaCliente(request);
 
         Cliente clienteSalvo = clienteBusinessObjectI.save(cliente);
