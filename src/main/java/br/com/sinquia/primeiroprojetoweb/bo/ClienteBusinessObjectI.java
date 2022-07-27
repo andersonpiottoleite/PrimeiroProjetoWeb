@@ -10,4 +10,10 @@ public interface ClienteBusinessObjectI {
     Cliente save(Cliente cliente);
 
     List<Cliente> findAll();
+
+    void delete(String idCliente);
+
+    Cliente getById(String idCliente);
+
+    Cliente update(Cliente cliente);
 }

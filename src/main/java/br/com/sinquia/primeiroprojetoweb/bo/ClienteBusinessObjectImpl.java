@@ -7,6 +7,7 @@ import br.com.sinquia.primeiroprojetoweb.model.Cliente;
 import javax.inject.Inject;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 public class ClienteBusinessObjectImpl implements ClienteBusinessObjectI{
 
@@ -32,5 +33,26 @@ public class ClienteBusinessObjectImpl implements ClienteBusinessObjectI{
     @Override
     public List<Cliente> findAll(){
         return clienteDAO.findAll();
+    }
+
+    @Override
+    public void delete(String idCliente) {
+        clienteDAO.delete(idCliente);
+    }
+
+    @Override
+    public Cliente getById(String idCliente) {
+        Optional<Cliente> optionalCliente = clienteDAO.getById(idCliente);
+        if (optionalCliente.isPresent()){
+            return optionalCliente.get();
+        } else {
+            throw new IllegalArgumentException("Cliente não encontrado para o id: ".concat(idCliente));
+        }
+    }
+
+    @Override
+    public Cliente update(Cliente cliente) {
+        Optional<Cliente> optionalCliente = clienteDAO.update(cliente);
+        return optionalCliente.get();
     }
 }

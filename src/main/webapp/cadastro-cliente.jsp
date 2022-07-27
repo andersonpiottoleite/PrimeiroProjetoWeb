@@ -14,7 +14,7 @@
     <h1>Cadastro de Cliente</h1>
     <fieldset>
         <legend>Dados basicos</legend>
-        <form action="cliente-servlet" method="post">
+        <form action="cliente-servlet/cadastrar-cliente" method="post">
             <div>
                 <label for="idNome">Nome:</label>
                 <input type="text" id="idNome" name="nome">

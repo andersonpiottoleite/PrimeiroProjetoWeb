@@ -13,7 +13,13 @@
 </head>
 <body>
     <h1>Lista de Clientes cadastrados</h1>
-    <h3>Cliente  de id: ${idClienteSalvo} , cadastrado com sucesso!</h3>
+
+    <c:if test="${idClienteSalvo != null}">
+        <h3>Cliente de id: ${idClienteSalvo} , cadastrado com sucesso!</h3>
+    </c:if>
+    <c:if test="${idClienteAlterado != null}">
+        <h3>Cliente de id: ${idClienteSalvo} , alterado com sucesso!</h3>
+    </c:if>
 
     <table border="solid">
         <tr>
@@ -23,6 +29,8 @@
             <th>Email</th>
             <th>Idade</th>
             <th>Maior de idade</th>
+            <th>Editar</th>
+            <th>Deletar</th>
         </tr>
         <c:forEach var="cliente" items="${clientes}" varStatus="id">
             <tr>
@@ -48,9 +56,15 @@
                     </c:choose>
 
                 </td>
+                <td>
+                    <a href="${pageContext.request.contextPath}/cliente-servlet/carregar-para-edicao?id=<c:out value='${cliente.id}' />">Edit</a>
+                </td>
+                <td>
+                    <a href="${pageContext.request.contextPath}/cliente-servlet/deletar?id=<c:out value='${cliente.id}' />">Delete</a>
+                </td>
             </tr>
         </c:forEach>
     </table>
-    <a href="cadastro-cliente.jsp">Cadastre um novo Cliente</a>
+    <a href="${pageContext.request.contextPath}/cadastro-cliente.jsp">Cadastre um novo Cliente</a>
 </body>
 </html>
